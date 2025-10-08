@@ -224,17 +224,6 @@ yarn install
 bun install
 ```
 
-3. **Configure API Keys** (if needed)
-
-The application comes with pre-configured API keys for the MVP:
-- **OpenRouter API Key**: `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`
-
-⚠️ **For Production**: Replace these with your own API keys in `src/pages/Index.tsx`:
-
-```typescript
-const OPENROUTER_API_KEY = "your-openrouter-api-key";
-```
-
 ### Running the Application
 
 **Development Mode**
