@@ -81,13 +81,13 @@ Comprehensive study analytics:
 
 ### 🎨 User Experience
 
-#### 9. **Theme Toggle**
+#### 8. **Theme Toggle**
 - **Dark/Light Mode**: Seamless theme switching
 - **Welcome Screen Access**: Toggle theme before starting
 - **Persistent Preference**: Theme choice saved to localStorage
 - **Beautiful Design**: Carefully crafted color palettes for both modes
 
-#### 10. **Responsive Design**
+#### 9. **Responsive Design**
 - Mobile-friendly layouts
 - Tablet-optimized views
 - Desktop full-feature experience
