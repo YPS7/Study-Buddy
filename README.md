@@ -32,7 +32,7 @@ Generate customized quizzes tailored to your study needs:
 An intelligent conversational tutor that:
 - Answers questions about your coursebook with page citations
 - Provides step-by-step explanations using chain-of-thought reasoning
-- Includes real-world examples and applications
+- Uses RAG (Retrieval-Augmented Generation) to fetch accurate answers directly from coursebook documents with page citations
 - Highlights common misconceptions
 - Maintains conversation context for follow-up questions
 - Uses structured pedagogical approach for deep learning
@@ -59,7 +59,7 @@ Prepare for competitive exams with targeted question banks:
 
 ### 🎯 Progress & Engagement
 
-#### 6. **Study Streaks & Gamification**
+#### 6. **Study Streaks & Gamification (Future Implimentations)**
 Stay motivated with local progress tracking:
 - **Daily Streaks**: Track consecutive study days
 - **Quiz Statistics**: Monitor total quizzes completed
@@ -78,16 +78,6 @@ Comprehensive study analytics:
   - Quizzes completed
   - Average scores
   - Question breakdown by type
-- **Progress Visualization**: Charts showing performance trends
-- **Comparison Reports**: Compare current session with previous sessions
-- **Downloadable**: Generate PDF reports for record-keeping
-
-#### 8. **Progress Dashboard**
-Visual analytics with interactive charts:
-- **Quiz Performance Trends**: Line charts showing score improvements
-- **Question Type Analysis**: Pie charts of MCQ/SAQ/LAQ distribution
-- **Study Pattern Insights**: Identify strengths and weaknesses
-- **Historical Data**: Track long-term learning progress
 
 ### 🎨 User Experience
 
@@ -139,10 +129,6 @@ Visual analytics with interactive charts:
   - Theme preferences
 - **date-fns**: Date manipulation and formatting
 - **TanStack Query**: (Future) Server state management
-
-### Gamification & Animations
-- **canvas-confetti**: Celebration animations for achievements
-- **CSS Animations**: Smooth transitions and hover effects
 
 ---
 
@@ -201,11 +187,6 @@ study-buddy/
 ---   
 
 ## 🚀 Getting Started
-
-### Prerequisites
-- **Node.js** (v18 or higher recommended)
-- **npm** or **yarn** or **bun** package manager
-- Modern web browser (Chrome, Firefox, Safari, Edge)
 
 ### Installation
 
@@ -286,11 +267,6 @@ npm run preview
 3. Choose difficulty level
 4. Click "Generate Questions"
 5. Download the PDF question bank
-
-### 7. Tracking Progress
-- **Streaks Tab**: View daily streaks and achievements
-- **Progress Tab**: Analyze your performance with charts
-- **End Session**: Generate a comprehensive session report
 
 --- 
 
