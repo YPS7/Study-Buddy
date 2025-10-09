@@ -1,4 +1,3 @@
-/// <reference types="vite/client" />
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -9,7 +8,6 @@ import { CheckCircle2, XCircle, RotateCw, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { QuizResult } from "@/lib/sessionReport";
 
-// small helpers to read Vite env variables (VITE_ prefix must be used in .env)
 const getOpenRouterKey = (): string => {
   return (import.meta.env.VITE_OPENROUTER_API_KEY as string) || "";
 };
@@ -40,21 +38,17 @@ const normalize = (s = "") => (s || "").toLowerCase().replace(/[^a-z0-9]+/g, " "
 const deriveCorrectIndex = (q: Question): number | null => {
   if (!q.options || q.options.length === 0) return null;
   const ca = (q.answer || "").trim();
-
-  // If answer begins with a letter (A, B, C...)
   const m = ca.match(/^[A-Za-z]/);
   if (m) {
     const idx = indexForLetter(m[0]);
     if (idx >= 0 && idx < q.options.length) return idx;
   }
 
-  // Try normalized text equality
   const nca = normalize(ca);
   for (let i = 0; i < q.options.length; i++) {
     if (normalize(q.options[i]) === nca) return i;
   }
 
-  // Loose contains match
   for (let i = 0; i < q.options.length; i++) {
     const no = normalize(q.options[i]);
     if (no && (nca.includes(no) || no.includes(nca))) return i;
@@ -112,36 +106,26 @@ const QuizComponent = ({ questions, onComplete, onGenerateNew, isGenerating }: Q
     const ua = (userAnswer || "").trim();
     const ca = (q.answer || "").trim();
 
-    // MCQ: strict letter index matching when possible
     if (q.type === "mcq" && q.options?.length) {
       const userIdx = indexForLetter((ua || "")[0]);
       const correctIdx = deriveCorrectIndex(q);
 
-      // If user picked a letter and correct index is known -> strict compare
       if (userIdx >= 0 && correctIdx != null) {
         return userIdx === correctIdx;
       }
 
-      // If user stored full text or letter parsing failed, try to map by normalized text
       const nUa = normalize(ua);
       const foundIdx = q.options.findIndex((o) => normalize(o) === nUa);
       if (foundIdx >= 0) {
-        // we do NOT mutate state here; return true/false based on equality
         if (correctIdx != null) return foundIdx === correctIdx;
         return normalize(q.options[foundIdx]) === normalize(ca);
       }
-
-      // Final fallback: compare normalized selected option text (if we can get userIdx)
       if (userIdx >= 0) {
         const userText = q.options[userIdx] ?? ua;
         return normalize(userText) === normalize(ca);
       }
-
-      // Fallback textual equality with correct answer
       return normalize(ua) === normalize(ca);
     }
-
-    // SAQ/LAQ: semantic check via OpenRouter (browser). If fails, fallback to normalized text equality.
     try {
       const apiKey = getOpenRouterKey();
       if (!apiKey) throw new Error("OpenRouter key not configured");
@@ -190,8 +174,6 @@ const QuizComponent = ({ questions, onComplete, onGenerateNew, isGenerating }: Q
       setResults(newResults);
       setShowResults(true);
       const score = newResults.filter(Boolean).length;
-
-      // Create detailed quiz results for PDF report with formatted MCQ displays
       const quizResults: QuizResult[] = questions.map((q, index) => {
         const ua = userAnswers[index] || "";
         const displayedAnswer = q.type === "mcq" ? formatMcq(q, ua) : ua;
